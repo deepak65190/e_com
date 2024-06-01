@@ -1,0 +1,21 @@
+.container{
+    width: 90%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    flex-wrap: wrap;
+    margin: auto;
+}
+
+/* single card .container */
+.cardContainer{
+    transition: all .1s linear;
+
+}
+.cardContainer:hover{
+    cursor: pointer;
+scale: .99;
+}
