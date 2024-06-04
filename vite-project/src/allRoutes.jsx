@@ -1,11 +1,19 @@
 import React from 'react'
-import { Router ,Route } from 'react-router-dom' ;
+import {Route ,Routes } from 'react-router-dom' ;
 import Home from './components/Home';
+import Login from './components/Login';
+import Signup from './components/Signup';
+import SinglePage from './components/SinglePage';
+import NotFound from './NotFound';
 const AllRoutes = () => {
   return (
-    <Router>
+    <Routes>
       <Route path='/' element={<Home/>}/>
-    </Router>
+      <Route path='/login' element={<Login/>}/>
+      <Route path='/signup' element={<Signup/>}/>
+      <Route path='/:productID' element={<SinglePage/>}/>
+      <Route path='*' element={<NotFound/>}/>
+    </Routes>
   )
 }
 

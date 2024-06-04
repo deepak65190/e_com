@@ -1,11 +1,17 @@
 import { Box, Image ,Text } from "@chakra-ui/react";
-import styles from "./Home.module.css"
+import styles from "./Home.module.css" ;
+import { useNavigate ,Link} from "react-router-dom";
 import React from "react";
 
 const SingleCard = (props) => {
-    console.log(props.sData ,"adf")
+  const navigate=useNavigate() ;
+  
+    const handleSinglePage=()=>{
+      navigate(`/:productID `)
+    }
   return (
-    <Box className={styles.cardContainer} textAlign={"center"} borderWidth="1px" p={"10px"} backgroundColor={"#efefef"} borderRadius="lg" overflow="hidden" maxW="sm" boxShadow="md">
+    <Link to={`/:${productID}`}>
+    <Box  className={styles.cardContainer} textAlign={"center"} borderWidth="1px" p={"10px"} backgroundColor={"#efefef"} borderRadius="lg" overflow="hidden" maxW="sm" boxShadow="md">
       <Image
         src={props.sData.thumbnail}
         alt={"hii"}
@@ -19,7 +25,7 @@ const SingleCard = (props) => {
       </Text>
       <Text>{props.sData.price}</Text>
       <Text ml={2} pb={"5px"}>{props.sData.rating}</Text>
-    </Box>
+    </Box></Link>
   );
 };
 
