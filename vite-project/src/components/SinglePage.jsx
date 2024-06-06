@@ -1,10 +1,11 @@
 import React from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom' 
+import styes from "./Home.module.css"
 const SinglePage = () => {
   const {productID}=useParams() ;
   console.log(productID)
   return (
-    <div>
+    <div className={styes.SinglePageContainer} >
       <div><img src="https://cdn.dummyjson.com/products/images/beauty/Essence%20Mascara%20Lash%20Princess/thumbnail.png" alt="" /></div>
       <div>
 <h2>Title</h2>

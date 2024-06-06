@@ -19,3 +19,13 @@
     cursor: pointer;
 scale: .99;
 }
+
+/* SinglePageContainer => single page css */
+.SinglePageContainer{
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid red;
+    margin: auto;
+}
