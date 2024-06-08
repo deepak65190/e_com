@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
-import { useToast } from '@chakra-ui/react'
+import { useToast } from '@chakra-ui/react' ;
+import { useNavigate } from "react-router-dom";
 import {
   FormControl,
   FormLabel,
@@ -11,8 +12,8 @@ import {
 
 
 const Signup = () => {
-  
-
+  const toast=useToast()
+const navigate=useNavigate()
   const [formData, setFormData] = useState({
     name: "",
     email:"" ,
@@ -28,7 +29,15 @@ const form={
     email:formData.email.trim(),
     password:formData.password.trim()
 }
-      localStorage.setItem("auth",JSON.stringify(form))
+      localStorage.setItem("auth",JSON.stringify(form)) ;
+      toast({
+        position: 'top',
+          description: "Signup Successfull",
+          status: 'success',
+          duration: 2000,
+          isClosable: true,
+        })
+      navigate("/")
   }
   };
 

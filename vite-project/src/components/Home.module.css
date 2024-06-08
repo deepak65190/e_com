@@ -26,6 +26,12 @@ scale: .99;
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid red;
+    
     margin: auto;
+}
+@media screen and (max-width:767px) {
+    .SinglePageContainer{
+        width: 100%;
+        
+    }
 }

@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
-import { useToast } from '@chakra-ui/react'
+import { useToast } from '@chakra-ui/react' ;
+import { useNavigate } from "react-router-dom";
 import {
   FormControl,
   FormLabel,
@@ -11,7 +12,7 @@ import {
 
 
 const Login = () => {
-  
+  const navigate=useNavigate()
     const toast = useToast()
   const [formData, setFormData] = useState({
     email: "",
@@ -22,11 +23,21 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
    let localData=JSON.parse(localStorage.getItem("auth"))
+   if(localData==null){
+    toast({
+      position: 'top',
+        description: "No data found ! Signup first",
+        status: 'warning',
+        duration: 2000,
+        isClosable: true,
+      })
+      return
+   }
    if(localData.email===formData.email.trim() && localData.password===formData.password.trim()){
-    alert("done")
+    navigate("/")
    }else{
     toast({
-       
+      position: 'top',
         description: "Wrong Credentials",
         status: 'warning',
         duration: 2000,
