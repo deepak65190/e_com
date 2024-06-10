@@ -93,6 +93,7 @@ console.log(cardData ,"helkoo")
       width={{ base: '100%', md: '90%' }}
       m={"auto"} 
       backgroundColor={"#EFEFEF"}
+      mt={{base:"50px", md:"100px"}}
     >
       <Box flex="1" mb={{ base: 4, md: 0 }} mr={{ md: 4 }}>
         {data.images && data.images.length > 0 && (

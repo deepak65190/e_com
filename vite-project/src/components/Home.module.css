@@ -8,6 +8,8 @@
 
     flex-wrap: wrap;
     margin: auto;
+    margin-top: 70px;
+    background: rgb(155, 155, 222);
 }
 
 /* single card .container */
@@ -35,3 +37,87 @@ scale: .99;
         
     }
 }
+
+/* navabar */
+
+  
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    padding: 10px 20px;
+    color: white;
+  }
+  
+  .navbar-logo {
+    font-size: 1.5em;
+    font-weight: bold;
+  }
+  
+  .navbar-search {
+    display: flex;
+    align-items: center;
+  }
+  
+  .navbar-search input {
+    padding: 5px;
+    border: none;
+    border-radius: 3px;
+  }
+  
+  .navbar-search button {
+    background-color: #555;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 3px;
+  }
+  
+  .navbar-search button:hover {
+    background-color: #777;
+  }
+  
+  .navbar-icons {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .navbar-icons svg {
+    cursor: pointer;
+  }
+  
+  @media (max-width: 768px) {
+    .navbar-search {
+      flex-grow: 1;
+    }
+  
+    .navbar-icons {
+      gap: 10px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .navbar {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .navbar-search {
+      width: 100%;
+      margin-top: 10px;
+    }
+  
+    .navbar-search input {
+      width: 80%;
+    }
+  
+    .navbar-icons {
+      width: 100%;
+      justify-content: space-around;
+      margin-top: 10px;
+    }
+  }
+  
