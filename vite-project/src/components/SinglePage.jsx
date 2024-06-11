@@ -60,7 +60,7 @@ discount:data.discountPercentage
   }
   
 }
-console.log(cardData ,"helkoo")
+
   useEffect(() => {
     axios
       .get(`https://dummyjson.com/products/${productID}`)
