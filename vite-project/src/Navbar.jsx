@@ -96,8 +96,9 @@ const handleLogin=()=>{
         onClick={() => navigate("/")} cursor="pointer"
       />
             <InputGroup display={{ base: 'none', md: 'flex' }} maxW="md">
-              <InputLeftElement pointerEvents="none" children={<SearchIcon color="gray.500" />} />
               <Input type="search" placeholder="Search" />
+              <InputLeftElement pointerEvents="none" children={<SearchIcon color="gray.500" />} />
+              
             </InputGroup>
             <Flex alignItems="center">
               <Stack direction="row" spacing={4} position="relative">

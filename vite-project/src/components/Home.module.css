@@ -9,7 +9,7 @@
     flex-wrap: wrap;
     margin: auto;
     margin-top: 20px;
-    background: rgb(155, 155, 222);
+    
 }
 
 .filterContainer{
@@ -18,6 +18,14 @@
     margin: auto;
 
     margin-top: 70px;
+}
+
+.filterBtn{
+    width: 60%;
+   
+    margin: auto;
+    
+    
 }
 /* single card .container */
 .cardContainer{
