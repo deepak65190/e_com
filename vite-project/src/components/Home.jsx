@@ -49,7 +49,7 @@ const Home = () => {
     <div>
       <div className={styles.filterContainer}>
 <div className={styles.filterBtn}>
-  {/* <Wrap spacing={4}>
+   <Wrap spacing={4}>
    
     <WrapItem>
     <Button colorScheme='red' cursor='pointer' onClick={()=>setFilter("laptops")}>
@@ -57,7 +57,7 @@ const Home = () => {
     </Button>    </WrapItem>
     
 
-  </Wrap> */}
+  </Wrap> 
    <Button colorScheme='red' cursor='pointer' onClick={()=>setFilter("laptops")}>
       laptops
     </Button>
