@@ -45,7 +45,7 @@ const form={
   return (
     <div style={{ marginTop: "20px" }}>
       <Box
-        w={"30%"}
+        width={{ base: "96%", md: "30%" }}
         
         m={"auto"}
         p={5}
@@ -62,6 +62,7 @@ const form={
                 type="text"
                 name="name"
                 required
+                
                 value={formData.name}
                 onChange={(e) =>
                   setFormData({ ...formData, name: e.target.value })
