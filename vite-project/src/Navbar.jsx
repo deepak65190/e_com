@@ -106,7 +106,9 @@ const handleLogin=()=>{
                   size="lg"
                   icon={<FaShoppingCart />}
                   aria-label="Add to Cart"
+                  cursor="pointer"
                   display={{ base: 'none', md: 'flex' }}
+                  onClick={()=>navigate("/cart")}
                 />
                 {productNum > 0 && (
                   <Box
