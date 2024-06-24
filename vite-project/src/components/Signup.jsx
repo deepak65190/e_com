@@ -48,6 +48,7 @@ const form={
         width={{ base: "96%", md: "30%" }}
         
         m={"auto"}
+        marginTop={"20px"}
         p={5}
         boxShadow={
           "rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px"

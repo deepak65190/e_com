@@ -56,6 +56,7 @@ const Login = () => {
         width={{ base: "96%", md: "30%" }}
         m={"auto"}
         p={5}
+        marginTop={"20px"}
         boxShadow={
           "rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px"
         }
