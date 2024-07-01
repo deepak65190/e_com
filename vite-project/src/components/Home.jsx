@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useSearchParams } from "react-router-dom";
 import styles from "./Home.module.css";
+import useDebounce from "./Debounce";
 import SingleCard from "./SingleCard";
+
 import {
   Flex,
   Spinner,
@@ -15,13 +18,19 @@ import {
 const Home = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [filter, setFilter] = useState("");
-  const [pagination, setPagination] = useState(1); // Updated state name
+  const [searchParams, setSearchParams] = useSearchParams();
+  const debouncedSearch = useDebounce();
+
+  const filter = searchParams.get("filter") || "";
+  const pagination = parseInt(searchParams.get("page")) || 1;
+
   const page = (pagination - 1) * 10;
 
   useEffect(() => {
     setLoading(true);
-    const url = filter
+    const url = debouncedSearch
+      ? `https://dummyjson.com/products/search?q=${debouncedSearch}&limit=10&skip=${page}`
+      : filter
       ? `https://dummyjson.com/products/category/${filter}?limit=10&skip=${page}`
       : `https://dummyjson.com/products?limit=10&skip=${page}`;
     axios
@@ -34,27 +43,22 @@ const Home = () => {
         console.log(err);
         setLoading(false);
       });
-  }, [pagination, filter]);
+  }, [pagination, filter, debouncedSearch, page]);
 
   // Update pagination
   const handlePrevPage = () => {
     if (pagination > 1) {
-      setPagination((prevPagination) => prevPagination - 1);
+      setSearchParams({ filter, page: pagination - 1 });
     }
   };
 
   // Update pagination
   const handleNextPage = () => {
-    // console.log(data.length ,"len")
-    //   const NextBtnD=Math.ceil(data.length%10) ;
+    setSearchParams({ filter, page: pagination + 1 });
+  };
 
-    // console.log(NextBtnD)
-    // if(pagination<=NextBtnD){
-
-    setPagination((prevPagination) => prevPagination + 1);
-    // }else{
-    //   return
-    // }
+  const handleFilterChange = (newFilter) => {
+    setSearchParams({ filter: newFilter, page: 1 });
   };
 
   if (loading) {
@@ -74,7 +78,7 @@ const Home = () => {
               <Button
                 colorScheme="red"
                 cursor="pointer"
-                onClick={() => setFilter("laptops")}
+                onClick={() => handleFilterChange("laptops")}
               >
                 laptops
               </Button>{" "}
@@ -84,7 +88,7 @@ const Home = () => {
               <Button
                 colorScheme="orange"
                 cursor={"pointer"}
-                onClick={() => setFilter("beauty")}
+                onClick={() => handleFilterChange("beauty")}
               >
                 beauty
               </Button>
@@ -94,7 +98,7 @@ const Home = () => {
               <Button
                 colorScheme="yellow"
                 cursor={"pointer"}
-                onClick={() => setFilter("furniture")}
+                onClick={() => handleFilterChange("furniture")}
               >
                 furniture
               </Button>
@@ -104,7 +108,7 @@ const Home = () => {
               <Button
                 colorScheme="green"
                 cursor={"pointer"}
-                onClick={() => setFilter("mens-shoes")}
+                onClick={() => handleFilterChange("mens-shoes")}
               >
                 mens-shoes
               </Button>
@@ -114,7 +118,7 @@ const Home = () => {
               <Button
                 colorScheme="teal"
                 cursor={"pointer"}
-                onClick={() => setFilter("sunglasses")}
+                onClick={() => handleFilterChange("sunglasses")}
               >
                 sunglasses
               </Button>
@@ -124,7 +128,7 @@ const Home = () => {
               <Button
                 colorScheme="blue"
                 cursor={"pointer"}
-                onClick={() => setFilter("tops")}
+                onClick={() => handleFilterChange("tops")}
               >
                 tops
               </Button>
@@ -133,7 +137,7 @@ const Home = () => {
               <Button
                 colorScheme="cyan"
                 cursor={"pointer"}
-                onClick={() => setFilter("smartphones")}
+                onClick={() => handleFilterChange("smartphones")}
               >
                 smartphones
               </Button>

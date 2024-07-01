@@ -5,7 +5,10 @@ import CardCom from "./components/CardCom";
 function App() {
   return (
     <>
-      <Navbar />
+    <div style={{marginBottom:"100px"}}>
+    <Navbar />
+    </div>
+      
       <AllRoutes />
     </>
   );

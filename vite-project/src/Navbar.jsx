@@ -1,7 +1,8 @@
 import { useNavigate } from 'react-router-dom'; 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import { SearchContext } from './context/Search';
 import { useCard } from './context/Card'; 
-import logo from "../src/assets/logo.png"
+import logo from "../src/assets/logo.png";
 import {
   Box,
   Flex,
@@ -18,27 +19,29 @@ import {
   Text,
   Drawer,
   DrawerBody,
-  Image ,
+  Image,
   DrawerHeader,
   DrawerOverlay,
   DrawerContent,
   DrawerCloseButton,
-
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon, SearchIcon } from '@chakra-ui/icons';
 import { FaShoppingCart, FaUser } from 'react-icons/fa';
-
 
 const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isDrawerOpen, setDrawerOpen] = useState(false);
   const [isHovering, setHovering] = useState(false);
   const [productNum, setProductNum] = useState(0);
-  
-  const [cardData ,setCardData]=useCard() ;
+  const [cardData, setCardData] = useCard();
+  const { search, setSearch } = useContext(SearchContext);
   const navigate = useNavigate();
   const auth = JSON.parse(localStorage.getItem("auth"));
-  const userName = auth ? auth.name[0].toUpperCase() : "" ;
+  const userName = auth ? auth.name[0].toUpperCase() : "";
+
+  const handleSearch = (e) => {
+    setSearch(e.target.value);
+  };
 
   useEffect(() => {
     setProductNum(cardData.length);
@@ -54,32 +57,28 @@ const Navbar = () => {
       return () => clearTimeout(timer);
     }
   }, [isHovering]);
-const handleLogout=()=>{
-  localStorage.removeItem('auth');
-navigate("/")
-setCardData([])
-setDrawerOpen(false)
-}
-const handleSignup=()=>{
-  navigate("/signup") ;
-  setDrawerOpen(false)
-}
-const handleLogin=()=>{
-  navigate("/login") ;
-  setDrawerOpen(false)
-}
 
+  const handleLogout = () => {
+    localStorage.removeItem('auth');
+    navigate("/");
+    setCardData([]);
+    setDrawerOpen(false);
+  };
+
+  const handleSignup = () => {
+    navigate("/signup");
+    setDrawerOpen(false);
+  };
+
+  const handleLogin = () => {
+    navigate("/login");
+    setDrawerOpen(false);
+  };
 
   return (
     <>
-      <Flex justifyContent="center" width="100%" position="fixed" zIndex="1000" top={0}>
-        <Box
-          bg={useColorModeValue('gray.100', 'gray.900')}
-          boxShadow="rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px"
-          width={{ base: "100%", md: "90%" }}
-          px={4}
-          mb="50px"
-        >
+      <Flex justifyContent="center" width="100%"  position="fixed" zIndex="1000" height={"80px"} top={0} bg={useColorModeValue('gray.100', 'gray.900')} boxShadow="rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px">
+        <Box width={{ base: "100%", md: "90%" }} px={4} mb="50px">
           <Flex h={16} alignItems="center" justifyContent="space-between">
             <IconButton
               size="md"
@@ -88,17 +87,17 @@ const handleLogin=()=>{
               display={{ md: 'none' }}
               onClick={isOpen ? onClose : onOpen}
             />
-             <Image
-        src={logo}
-        objectFit={"cover"}
-        width={"50px"} 
-        height={"50px"}
-        onClick={() => navigate("/")} cursor="pointer"
-      />
+            <Image
+              src={logo}
+              objectFit={"cover"}
+              width={"50px"} 
+              height={"50px"}
+              onClick={() => navigate("/")}
+              cursor="pointer"
+            />
             <InputGroup display={{ base: 'none', md: 'flex' }} maxW="md">
-              <Input type="search" placeholder="Search" />
+              <Input type="search" placeholder="Search" onChange={handleSearch} />
               <InputLeftElement pointerEvents="none" children={<SearchIcon color="gray.500" />} />
-              
             </InputGroup>
             <Flex alignItems="center">
               <Stack direction="row" spacing={4} position="relative">
@@ -108,7 +107,7 @@ const handleLogin=()=>{
                   aria-label="Add to Cart"
                   cursor="pointer"
                   display={{ base: 'none', md: 'flex' }}
-                  onClick={()=>navigate("/cart")}
+                  onClick={() => navigate("/cart")}
                 />
                 {productNum > 0 && (
                   <Box
@@ -138,11 +137,7 @@ const handleLogin=()=>{
                     aria-label="User Account"
                     display={{ base: 'none', md: 'flex' }}
                   />
-                  {/* {userName ? (
-                    <Text display={{ base: 'none', md: 'flex' }}>{userName}</Text>
-                  ) : ( */}
-                    <Avatar size="sm" display={{ base: 'flex', md: 'none' }} />
-                  {/* )} */}
+                  <Avatar size="sm" display={{ base: 'flex', md: 'none' }} />
                 </Box>
               </Stack>
             </Flex>
@@ -153,7 +148,7 @@ const handleLogin=()=>{
               <Stack as="nav" spacing={4}>
                 <InputGroup>
                   <InputLeftElement pointerEvents="none" children={<SearchIcon color="gray.500" />} />
-                  <Input type="search" placeholder="Search" />
+                  <Input type="search" placeholder="Search" onChange={handleSearch} />
                 </InputGroup>
                 <Button w="full" leftIcon={<FaShoppingCart />} _hover={{boxShadow: "rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px"}} justifyContent="flex-start">
                   Cart products: {productNum}
@@ -167,9 +162,9 @@ const handleLogin=()=>{
         </Box>
       </Flex>
 
-      <Drawer  isOpen={isDrawerOpen} placement="right" onClose={() => setDrawerOpen(false)}>
+      <Drawer isOpen={isDrawerOpen} placement="right" onClose={() => setDrawerOpen(false)}>
         <DrawerOverlay />
-      <DrawerContent maxH={"40vh"}h={"50vh"} onMouseEnter={() => setHovering(true)} onMouseLeave={() => setHovering(false)}>
+        <DrawerContent maxH={"40vh"} h={"50vh"} onMouseEnter={() => setHovering(true)} onMouseLeave={() => setHovering(false)}>
           <DrawerCloseButton />
           <DrawerHeader>Account</DrawerHeader>
           <DrawerBody>
@@ -179,7 +174,6 @@ const handleLogin=()=>{
               <Button w="full" onClick={handleLogout}>Logout</Button>
             </Stack>
           </DrawerBody>
-         
         </DrawerContent>
       </Drawer>
     </>

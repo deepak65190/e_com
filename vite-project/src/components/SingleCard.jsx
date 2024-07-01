@@ -40,7 +40,7 @@ const SingleCard = (props) => {
         </Text>
       </HStack>
       <Text ml={2} pb={"5px"}>
-        {props.sData.rating}
+      Rating  {props.sData.rating}
       </Text>
     </Box>
   );
